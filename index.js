@@ -1,11 +1,14 @@
 import express from 'express';
+import cors from 'cors';
 
 const app = express();
 
 const port = process.env.PORT || 3001;
 
-app.get(`/`, (req, res) => {
-    res.send({ message: 'Hello from my back end'});
+app.use(cors());
+
+app.get(`/test`, (req, res) => {
+    res.send('Hello from my back end');
 });
 
 app.listen(port, () => {
