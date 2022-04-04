@@ -16,6 +16,10 @@ app.use(cors());
 app.use(express.json());
 app.use('/lists', listsRoutes);
 
+app.get(`/`, (req, res) => {
+    res.send('Hello world!');
+});
+
 app.get(`/test`, (req, res) => {
     res.send({ message: 'Fart'});
 });
