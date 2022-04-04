@@ -1,20 +1,19 @@
 import mongoose from 'mongoose';
+import { ReminderSchema } from './reminder.js';
 
 const ListSchema = new mongoose.Schema({
     name: {
-        type: 'String',
+        type: String,
         required: true
     },
     description: {
-        type: 'String',
+        type: String,
         required: true
     },
-    id: {
-        type: 'String',
-        required: true
+    reminders: {
+        type: [ReminderSchema],
+        required: false
     }
 });
 
-const List = mongoose.model("list", ListSchema);
-
-module.exports = List;
+export const List = mongoose.model("list", ListSchema);

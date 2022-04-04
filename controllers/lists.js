@@ -1,3 +1,5 @@
+import { List } from '../models/list.js';
+
 export const test = (req, res) => {
     console.log('in lists test function');
     res.send({
@@ -6,11 +8,18 @@ export const test = (req, res) => {
 };
 
 export const addListItem = (req, res) => {
-    const listToAdd = req.body;
-    res.send({
-        message: 'Lists addListItem function!',
-        itemAdded: listToAdd,
-    });
+    console.log('in controller', req.body);
+    const listObjToAdd = new List(req.body);
+    listObjToAdd.save(err => {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        return res.status(200).send(listObjToAdd)
+    })
+    // res.send({
+    //     message: 'Lists addListItem function!',
+    //     itemAdded: listToAdd,
+    // });
 }
 
 // export default test;
