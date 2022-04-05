@@ -10,10 +10,14 @@ const ListSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    id: {
+        type: String,
+        required: true
+    },
     reminders: {
         type: [ReminderSchema],
         required: false
-    }
+    },
 });
 
 export const List = mongoose.model("list", ListSchema);

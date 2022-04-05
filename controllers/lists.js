@@ -15,3 +15,14 @@ export const addListItem = (req, res) => {
         return res.status(200).send(listObjToAdd)
     })
 };
+
+export const deleteListItem = (req, res) => {
+    const id = req.params.id;
+    List.findOneAndDelete({ id }, (err, result) => {
+        if (err) {
+            return err;
+        } else {
+            return result;
+        }
+    })
+}

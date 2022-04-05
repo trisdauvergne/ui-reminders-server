@@ -9,6 +9,10 @@ export const ReminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    id: {
+        type: String,
+        required: true
     }
 });
 
