@@ -18,11 +18,11 @@ export const addListItem = (req, res) => {
 
 export const deleteListItem = (req, res) => {
     const id = req.params.id;
-    List.findOneAndDelete({ id }, (err, result) => {
+    List.findOneAndDelete({ id }, (err) => {
         if (err) {
-            return err;
+            return res.status(500).send(err);
         } else {
-            return result;
+            return res.sendStatus(200);
         }
     })
 }
