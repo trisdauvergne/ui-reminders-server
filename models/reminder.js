@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-export const ReminderSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+export const ReminderSchema = new Schema({
     description: {
         type: String,
         required: true
@@ -9,6 +11,10 @@ export const ReminderSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    notes: {
+        type: Array,
+        required: false
     },
     id: {
         type: String,

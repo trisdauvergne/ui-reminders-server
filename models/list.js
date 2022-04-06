@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 import { ReminderSchema } from './reminder.js';
 
-const ListSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const ListSchema = new Schema({
     name: {
         type: String,
         required: true

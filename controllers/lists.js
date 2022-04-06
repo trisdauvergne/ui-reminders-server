@@ -26,15 +26,15 @@ export const deleteListItem = (req, res) => {
     })
 };
 
-export const addReminder = (req, res) => {
-    const id = req.params.id;
-    const reminderToAdd = req.body;
-    List.findOneAndUpdate(
-        { id },
-        { $push: { reminders: reminderToAdd } },
-        (err) => {
-            if (err) return res.status(500).send(err);
-            return res.status(200).send(reminderToAdd);
-        }
-    )
-}
+// export const addReminder = (req, res) => {
+//     const id = req.params.id;
+//     const reminderToAdd = req.body;
+//     List.findOneAndUpdate(
+//         { id },
+//         { $push: { reminders: reminderToAdd } },
+//         (err) => {
+//             if (err) return res.status(500).send(err);
+//             return res.status(200).send(reminderToAdd);
+//         }
+//     )
+// }

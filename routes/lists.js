@@ -3,14 +3,14 @@ import {
     getLists,
     addListItem,
     deleteListItem,
-    addReminder
+    // addReminder
 } from '../controllers/lists.js';
 
 const listRouter = express.Router();
 
 listRouter.get('/', getLists);
 listRouter.post('/', addListItem);
-listRouter.post('/:id', addReminder);
+// listRouter.post('/:id', addReminder);
 listRouter.delete('/:id', deleteListItem);
 // listRouter.put('/:id');
 
