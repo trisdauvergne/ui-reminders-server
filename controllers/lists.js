@@ -8,7 +8,6 @@ export const getLists = (req, res) => {
 };
 
 export const addListItem = (req, res) => {
-    console.log('in controller', req.body);
     const listObjToAdd = new List(req.body);
     listObjToAdd.save(err => {
         if (err) return res.status(500).send(err);
@@ -25,4 +24,17 @@ export const deleteListItem = (req, res) => {
             return res.sendStatus(200);
         }
     })
+};
+
+export const addReminder = (req, res) => {
+    const id = req.params.id;
+    const reminderToAdd = req.body;
+    List.findOneAndUpdate(
+        { id },
+        { $push: { reminders: reminderToAdd } },
+        (err) => {
+            if (err) return res.status(500).send(err);
+            return res.status(200).send(reminderToAdd);
+        }
+    )
 }
