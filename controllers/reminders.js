@@ -38,3 +38,16 @@ export const changeReminderCompleted = (req, res) => {
         }
     )
 };
+
+export const changeReminderIncomplete = (req, res) => {
+    const listId = req.body.listId;
+    const reminderId = req.params.id;
+    List.findOneAndUpdate(
+        { id: listId, 'reminders.id': reminderId },
+        { $set: {'reminders.$.completed' : false }},
+        (err) => {
+            if (err) return res.status(500).send(err);
+            return res.status(200).send(reminderId);
+        }
+    )
+};
