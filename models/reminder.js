@@ -9,7 +9,7 @@ export const ReminderSchema = new Schema({
     },
     completed: {
         type: Boolean,
-        default: false,
+        // default: false,
         required: true
     },
     notes: {

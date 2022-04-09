@@ -9,12 +9,11 @@ export const getLists = (req, res) => {
 
 export const getListItem = (req, res) => {
     const listId = req.params.id;
-    console.log('in getListItem', listId);
     List.find({ id: listId }, (err, list) => {
         if (err) return res.status(500).send(err);
         return res.status(200).send(list);
     })
-}
+};
 
 export const addListItem = (req, res) => {
     const listObjToAdd = new List(req.body);
