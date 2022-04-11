@@ -18,10 +18,6 @@ app.use(express.json());
 app.use('/lists', listsRoutes);
 app.use('/reminders', reminderRoutes);
 
-app.get(`/`, (req, res) => {
-    res.send('Hello world!');
-});
-
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
