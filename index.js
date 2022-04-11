@@ -22,10 +22,6 @@ app.get(`/`, (req, res) => {
     res.send('Hello world!');
 });
 
-app.get(`/test`, (req, res) => {
-    res.send({ message: 'Fart'});
-});
-
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })
