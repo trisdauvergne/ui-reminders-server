@@ -49,6 +49,11 @@ io.on('connection', (socket) => {
         console.log('new list message', data);
         socket.broadcast.emit('receive_newlist', data);
     })
+
+    socket.on('send_deletelist', (data) => {
+        console.log('delete list message', data);
+        socket.broadcast.emit('receive_deletelist', data);
+    })
 }) // socket io
 
 // app.listen(port, () => {
