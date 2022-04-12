@@ -34,14 +34,20 @@ export const io = new Server(server, {
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
+    console.log(process.NODE_ENV);
 }); // socket io
 
 io.on('connection', (socket) => {
     console.log(`Socket ID: ${socket.id}`);
 
     socket.on('send_reminder', (data) => {
-        console.log('send message', data);
-        socket.broadcast.emit('receive_message', data);
+        console.log('new reminder message', data);
+        socket.broadcast.emit('receive_reminder', data);
+    })
+
+    socket.on('send_newlist', (data) => {
+        console.log('new list message', data);
+        socket.broadcast.emit('receive_newlist', data);
     })
 }) // socket io
 
