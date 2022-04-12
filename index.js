@@ -54,6 +54,11 @@ io.on('connection', (socket) => {
         console.log('delete list message', data);
         socket.broadcast.emit('receive_deletelist', data);
     })
+
+    socket.on('send_completed', (data) => {
+        console.log('completed reminder message', data);
+        socket.broadcast.emit('receive_completed', data);
+    })
 }) // socket io
 
 // app.listen(port, () => {
