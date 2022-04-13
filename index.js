@@ -36,7 +36,6 @@ server.listen(port, () => {
 
 io.sockets.on('connect', (socket) => {
     console.log(`Socket ID: ${socket.id}`);
-    // console.log('Number of connected users: ', io.engine.clientsCount);
 
     socket.on('send_reminder', (data) => {
         console.log('new reminder message', data, 'connected users: ', io.engine.clientsCount);
@@ -68,7 +67,3 @@ io.sockets.on('connect', (socket) => {
         socket.broadcast.emit('receive_alert', data);
     })
 });
-
-// app.listen(port, () => {
-//     console.log(`Listening on port ${port}`);
-// })
