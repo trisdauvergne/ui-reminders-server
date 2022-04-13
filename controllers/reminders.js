@@ -1,4 +1,5 @@
 import { List } from '../models/list.js';
+import { io } from '../index.js';
 
 export const addReminder = (req, res) => {
     const reminderToAdd = req.body;
