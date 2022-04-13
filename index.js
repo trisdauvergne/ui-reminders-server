@@ -4,10 +4,8 @@ import dotenv from 'dotenv';
 import listsRoutes from './routes/lists.js';
 import reminderRoutes from './routes/reminders.js'
 import { connectDB } from './config/db.js';
-
-// socket io
-import * as http from 'http'; // socket io
-import { Server } from 'socket.io'; // socket io
+import * as http from 'http';
+import { Server } from 'socket.io';
 
 dotenv.config();
 
@@ -22,44 +20,54 @@ app.use(express.json());
 app.use('/lists', listsRoutes);
 app.use('/reminders', reminderRoutes);
 
-// socket io
-const server = http.createServer(app); // socket io
+const server = http.createServer(app);
 
 export const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
-        methods: ['GET', 'POST']
+        // origin: 'http://localhost:3000',
+        allowedHeaders: ['Access-Control-Allow-Origin', '*'],
+        credentials: true,
     },
-}); // socket io
+});
 
 server.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
-    console.log(process.NODE_ENV);
-}); // socket io
+});
 
-io.on('connection', (socket) => {
+io.sockets.on('connect', (socket) => {
     console.log(`Socket ID: ${socket.id}`);
+    // console.log('Number of connected users: ', io.engine.clientsCount);
 
     socket.on('send_reminder', (data) => {
-        console.log('new reminder message', data);
-        socket.broadcast.emit('receive_reminder', data);
+        console.log('new reminder message', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
     })
 
     socket.on('send_newlist', (data) => {
-        console.log('new list message', data);
-        socket.broadcast.emit('receive_newlist', data);
+        console.log('in send new list socket: ', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
     })
 
     socket.on('send_deletelist', (data) => {
-        console.log('delete list message', data);
-        socket.broadcast.emit('receive_deletelist', data);
+        console.log('in delete list socket: ', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
     })
 
     socket.on('send_completed', (data) => {
-        console.log('completed reminder message', data);
-        socket.broadcast.emit('receive_completed', data);
+        console.log('in completed reminder socket: ', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
     })
-}) // socket io
+
+    socket.on('send_incomplete', (data) => {
+        console.log('in incomplete reminder socket: ', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
+    })
+
+    socket.on('send_deletereminder', (data) => {
+        console.log('in deleted reminder socket: ', data, 'connected users: ', io.engine.clientsCount);
+        socket.broadcast.emit('receive_alert', data);
+    })
+});
 
 // app.listen(port, () => {
 //     console.log(`Listening on port ${port}`);
